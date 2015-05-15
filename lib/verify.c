@@ -476,9 +476,11 @@ int rpmcliVerify(rpmts ts, QVA_t qva, char * const * argv)
     rpmdbOpenAll(rpmtsGetRdb(ts));
     if (rootDir && !rstreq(rootDir, "/")) {
 	if (chroot(rootDir) == -1) {
-	    rpmlog(RPMLOG_ERR, _("Unable to change root directory: %m\n"));
-	    ec = 1;
-	    goto exit;
+//          Remove check as it seems to be the only way to install as users. 
+//
+//	    rpmlog(RPMLOG_ERR, _("Unable to change root directory: %m\n"));
+//	    ec = 1;
+//	    goto exit;
 	} else {
 	    rpmtsSetChrootDone(ts, 1);
 	}

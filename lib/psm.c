@@ -1534,8 +1534,9 @@ rpmRC rpmpsmStage(rpmpsm psm, pkgStage stage)
 	    xx = chdir("/");
 	    if (rootDir != NULL && !rstreq(rootDir, "/") && *rootDir == '/')
 	        if (chroot(rootDir) == -1) {
-		    rpmlog(RPMLOG_ERR, _("Unable to change root directory: %m\n"));
-		    return -1;
+//                  Seems to be the only way to install as user.
+//		    rpmlog(RPMLOG_ERR, _("Unable to change root directory: %m\n"));
+//		    return -1;
 		}
 	    psm->chrootDone = 1;
 	    (void) rpmtsSetChrootDone(ts, 1);

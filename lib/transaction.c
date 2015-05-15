@@ -1288,9 +1288,12 @@ static int rpmtsPrepare(rpmts ts)
 	    /* opening db before chroot not optimal, see rhbz#103852 c#3 */
 	    xx = rpmdbOpenAll(ts->rdb);
 	    if (chroot(rootDir) == -1) {
-		rpmlog(RPMLOG_ERR, _("Unable to change root directory: %m\n"));
-		rc = -1;
-		goto exit;
+//              IGNORE and continue looks like the only way to 
+//              allow user installation, without having fakeroot!
+//		
+//		rpmlog(RPMLOG_ERR, _("Unable to change root directory: %m\n"));
+//		rc = -1;
+//		goto exit;
 	    }
 	}
 	(void) rpmtsSetChrootDone(ts, 1);
