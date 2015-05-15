@@ -57,7 +57,7 @@ typedef struct OpenFileInfo {
     char * fileName;
     FILE *fp;
     int lineNum;
-    char readBuf[BUFSIZ];
+    char readBuf[20*BUFSIZ];
     char * readPtr;
     struct OpenFileInfo * next;
 } OFI_t;
