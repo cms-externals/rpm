@@ -10,6 +10,7 @@
 #include <rpm/rpmlog.h>
 #include <rpm/rpmfileutil.h>
 #include "debug.h"
+#include <libgen.h>
 
 /**
  * Check that file owner and group are known.
