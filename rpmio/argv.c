@@ -142,6 +142,43 @@ int argvAdd(ARGV_t * argvp, const char *val)
     return 0;
 }
 
+int argvSortedInsert(ARGV_t *argvp, const char *val)
+{
+    ARGV_t argv;
+    int argc;
+    int i;
+    int comp;
+    if (argvp == NULL)
+      return -1;
+    argc = argvCount(*argvp);
+    argv = *argvp;
+    for (i = 0; i != argc; ++i)
+    {
+      comp = strcmp(val, argv[i]);
+      // String already in the list. Do not add.
+      if (!comp)
+        return 0;
+      // String can be inserted at position i. Move items in
+      // range [i, argc) to range [i+1, argc + 1) and then exit 
+      // the loop.
+      if (comp < 0)
+      {
+          *argvp = xrealloc(*argvp, (argc + 1 + 1) * sizeof(argvp));
+          argv = *argvp;
+          memmove(argv + i + 1, argv + i, sizeof(*argv) * (argc-i+1));
+          argv[i] = xstrdup(val);
+          return 0;
+      }
+    }
+    
+    // String has to be inserted at the end.
+    *argvp = xrealloc(*argvp, (argc + 1 + 1) * sizeof(argvp));
+    argv = *argvp;
+    argv[argc] = xstrdup(val);
+    argv[argc + 1] = NULL;
+    return 0;
+}
+
 int argvAddNum(ARGV_t *argvp, int val)
 {
     char *valstr = NULL;

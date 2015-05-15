@@ -292,10 +292,8 @@ static int rpmfcSaveArg(ARGV_t * argvp, const char * key)
 {
     int rc = 0;
 
-    if (argvSearch(*argvp, key, NULL) == NULL) {
-	rc = argvAdd(argvp, key);
-	rc = argvSort(*argvp, NULL);
-    }
+    rc = argvSortedInsert(argvp, key);
+
     return rc;
 }
 
