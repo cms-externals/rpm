@@ -1656,6 +1656,37 @@ exit:
     return rc;
 }
 
+static int
+__glob_pattern_p (const char *pattern, int quote)
+{
+  register const char *p;
+  int open = 0;
+
+  for (p = pattern; *p != '\0'; ++p)
+    switch (*p)
+      {
+      case '?':
+      case '*':
+        return 1;
+
+      case '\\':
+        if (quote && p[1] != '\0')
+          ++p;
+        break;
+
+      case '[':
+        open = 1;
+        break;
+
+      case ']':
+        if (open)
+          return 1;
+        break;
+      }
+
+  return 0;
+}
+
 /**
  * Add a file to a binary package.
  * @param pkg
@@ -1670,7 +1701,7 @@ static rpmRC processBinaryFile(Package pkg, FileList fl, const char * fileName)
     char *diskPath = NULL;
     int rc = RPMRC_OK;
     
-    doGlob = glob_pattern_p(fileName, quote);
+    doGlob = __glob_pattern_p(fileName, quote);
 
     /* Check that file starts with leading "/" */
     if (*fileName != '/') {

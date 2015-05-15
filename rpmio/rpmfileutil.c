@@ -543,6 +543,38 @@ char * rpmGetPath(const char *path, ...)
     return rpmCleanPath(res);
 }
 
+static int
+__glob_pattern_p (const char *pattern, int quote)
+{
+  register const char *p;
+  int open = 0;
+
+  for (p = pattern; *p != '\0'; ++p)
+    switch (*p)
+      {
+      case '?':
+      case '*':
+        return 1;
+
+      case '\\':
+        if (quote && p[1] != '\0')
+          ++p;
+        break;
+
+      case '[':
+        open = 1;
+        break;
+
+      case ']':
+        if (open)
+          return 1;
+        break;
+      }
+
+  return 0;
+}
+
+
 int rpmGlob(const char * patterns, int * argcPtr, ARGV_t * argvPtr)
 {
     int ac = 0;
@@ -588,7 +620,7 @@ int rpmGlob(const char * patterns, int * argcPtr, ARGV_t * argvPtr)
 	int local = (ut == URL_IS_PATH) || (ut == URL_IS_UNKNOWN);
 	glob_t gl;
 
-	if (!local || (!glob_pattern_p(av[j], 0) && strchr(path, '~') == NULL)) {
+	if (!local || (!__glob_pattern_p(av[j], 0) && strchr(path, '~') == NULL)) {
 	    argvAdd(&argv, av[j]);
 	    continue;
 	}
