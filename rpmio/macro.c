@@ -12,7 +12,7 @@
 
 #define	STREQ(_t, _f, _fn)	((_fn) == (sizeof(_t)-1) && rstreqn((_t), (_f), (_fn)))
 
-#define MACROBUFSIZ (BUFSIZ * 2)
+#define MACROBUFSIZ (BUFSIZ * 20)
 
 #include <rpm/rpmio.h>
 #include <rpm/rpmstring.h>
