@@ -33,8 +33,8 @@ static rpmds rpmlibP = NULL;
 #define HASHTYPE depCache
 #define HTKEYTYPE const char *
 #define HTDATATYPE int
-#include "lib/rpmhash.H"
-#include "lib/rpmhash.C"
+#include "lib/rpmhash_big.h"
+#include "lib/rpmhash_big.c"
 
 /**
  * Compare removed package instances (qsort/bsearch).

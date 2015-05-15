@@ -830,8 +830,8 @@ static void skipInstallFiles(const rpmts ts, rpmte p)
 
 #define HASHTYPE rpmStringSet
 #define HTKEYTYPE const char *
-#include "lib/rpmhash.H"
-#include "lib/rpmhash.C"
+#include "lib/rpmhash_big.h"
+#include "lib/rpmhash_big.c"
 
 /* Get a rpmdbMatchIterator containing all files in
  * the rpmdb that share the basename with one from

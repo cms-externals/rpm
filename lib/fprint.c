@@ -14,7 +14,7 @@
 #include <libgen.h>
 
 /* Create new hash table type rpmFpEntryHash */
-#include "lib/rpmhash.C"
+#include "lib/rpmhash_big.c"
 
 #undef HASHTYPE
 #undef HTKEYTYPE
@@ -22,7 +22,7 @@
 #define HASHTYPE rpmFpEntryHash
 #define HTKEYTYPE const char *
 #define HTDATATYPE const struct fprintCacheEntry_s *
-#include "lib/rpmhash.C"
+#include "lib/rpmhash_big.c"
 
 fingerPrintCache fpCacheCreate(int sizeHint)
 {
