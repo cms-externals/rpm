@@ -9,7 +9,7 @@
 
 #include "debug.h"
 
-uint64_t htonll( uint64_t n ) {
+uint64_t _htonll( uint64_t n ) {
     uint32_t *i = (uint32_t*)&n;
     uint32_t b = i[0];
     i[0] = htonl(i[1]);

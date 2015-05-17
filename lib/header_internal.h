@@ -97,7 +97,7 @@ extern "C" {
  * @return		number in network byte order
  */
 RPM_GNUC_INTERNAL
-uint64_t htonll( uint64_t n );
+uint64_t _htonll( uint64_t n );
 
 /** \ingroup header
  * Set header instance (rpmdb record number)

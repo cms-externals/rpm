@@ -408,7 +408,7 @@ static int regionSwab(indexEntry entry, int il, int dl,
 	    for (; ie.info.count > 0; ie.info.count--, it += 1) {
 		if (dataEnd && ((unsigned char *)it) >= dataEnd)
 		    return -1;
-		*it = htonll(*it);
+		*it = _htonll(*it);
 	    }
 	}   break;
 	case RPM_INT32_TYPE:
@@ -625,7 +625,7 @@ static void * doHeaderUnload(Header h,
 	    count = entry->info.count;
 	    src = entry->data;
 	    while (count--) {
-		*((uint64_t *)te) = htonll(*((uint64_t *)src));
+		*((uint64_t *)te) = _htonll(*((uint64_t *)src));
 		te += sizeof(uint64_t);
 		src += sizeof(uint64_t);
 	    }
